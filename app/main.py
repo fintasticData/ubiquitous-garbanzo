@@ -6,6 +6,10 @@ app = FastAPI(title="uG — Ubiquitous Garbanzo Engine")
 app.include_router(health.router)
 app.include_router(dynamic.router)
 app.include_router(ai_tools.router)
+app.include_router(musicgpt.router)
+
+
+
 
 @app.get("/")
 def root():
