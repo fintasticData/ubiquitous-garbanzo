@@ -1,3 +1,17 @@
+from fastapi import Request
+
+@app.options("/{path:path}")
+async def options_handler(path: str, request: Request):
+    return Response(
+        status_code=200,
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+        },
+    )
+
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
