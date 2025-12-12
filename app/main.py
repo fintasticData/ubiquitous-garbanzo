@@ -1,24 +1,22 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import health, dynamic, ai_tools, musicgpt
-
-origins = [
-    "*",  # better to restrict later
-]
-
+# --- Create app FIRST ---
 app = FastAPI(title="uG — Ubiquitous Garbanzo Engine")
 
-# --- CORS Middleware ---
+# --- Attach CORS middleware BEFORE loading routers ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# --- Routers ---
+# --- Import routers AFTER middleware is attached ---
+from app.routers import health, dynamic, ai_tools, musicgpt
+
+# --- Register routers ---
 app.include_router(health.router)
 app.include_router(dynamic.router)
 app.include_router(ai_tools.router)
